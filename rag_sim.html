@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAG Simulator</title>
+
+<style>
+
+body{
+    margin:0;
+    padding:30px;
+    background:#0f172a;
+    color:white;
+    font-family:Arial, sans-serif;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+h1{
+    text-align:center;
+    font-size:48px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#94a3b8;
+    margin-bottom:40px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.card{
+    background:#111827;
+    border-radius:20px;
+    padding:20px;
+    border:1px solid #334155;
+}
+
+textarea{
+    width:100%;
+    height:220px;
+    background:#020617;
+    color:white;
+    border:1px solid #334155;
+    border-radius:12px;
+    padding:15px;
+    font-size:15px;
+    resize:none;
+    box-sizing:border-box;
+}
+
+input{
+    width:100%;
+    background:#020617;
+    color:white;
+    border:1px solid #334155;
+    border-radius:12px;
+    padding:15px;
+    font-size:15px;
+    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+    margin-top:15px;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    background:linear-gradient(90deg,#3b82f6,#8b5cf6);
+    color:white;
+}
+
+button:hover{
+    opacity:0.9;
+}
+
+.step{
+    margin-top:20px;
+    background:#1e293b;
+    padding:15px;
+    border-radius:14px;
+}
+
+.step h3{
+    margin-top:0;
+    color:#93c5fd;
+}
+
+.chunk{
+    background:#0f172a;
+    padding:12px;
+    border-radius:10px;
+    margin-top:10px;
+    border-left:4px solid #38bdf8;
+}
+
+.vector{
+    margin-top:8px;
+    color:#86efac;
+    font-family:monospace;
+    font-size:13px;
+}
+
+.retrieved{
+    border-left:4px solid #22c55e;
+}
+
+.final{
+    border-left:4px solid #a855f7;
+}
+
+.flow{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+}
+
+.flow-item{
+    background:#1e293b;
+    padding:10px 14px;
+    border-radius:10px;
+    font-size:13px;
+}
+
+@media(max-width:900px){
+    .grid{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>RAG Simulator</h1>
+    <div class="subtitle">
+        Learn Retrieval-Augmented Generation visually
+    </div>
+
+    <div class="grid">
+
+        <!-- LEFT -->
+        <div class="card">
+
+            <h2>Knowledge Base</h2>
+
+            <textarea id="kb">
+RAG stands for Retrieval-Augmented Generation.
+
+Chunking splits large documents into smaller pieces.
+
+Embeddings convert text into numerical vectors.
+
+Vector databases store embeddings for semantic search.
+
+Semantic search finds meaning-based similarity.
+
+Retrieved chunks are injected into the prompt.
+
+LLMs generate grounded responses using retrieved context.
+            </textarea>
+
+            <button onclick="processKB()">
+                Process Knowledge Base
+            </button>
+
+            <div class="flow">
+                <div class="flow-item">1. Chunking</div>
+                <div class="flow-item">2. Embeddings</div>
+                <div class="flow-item">3. Vector DB</div>
+                <div class="flow-item">4. Retrieval</div>
+                <div class="flow-item">5. Context Injection</div>
+                <div class="flow-item">6. LLM Response</div>
+            </div>
+
+            <div id="kbOutput"></div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="card">
+
+            <h2>User Query</h2>
+
+            <input 
+                type="text"
+                id="query"
+                value="What are embeddings?"
+            >
+
+            <button onclick="runRAG()">
+                Run RAG
+            </button>
+
+            <div id="queryOutput"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+let vectorDB = [];
+
+function createEmbedding(text){
+
+    let vector = [];
+
+    vector.push(text.length);
+
+    vector.push(text.split(" ").length);
+
+    vector.push(
+        text.charCodeAt(0)
+    );
+
+    vector.push(
+        text.charCodeAt(text.length - 1)
+    );
+
+    return vector;
+}
+
+function similarity(a,b){
+
+    let score = 0;
+
+    for(let i=0;i<a.length;i++){
+        score += a[i] * b[i];
+    }
+
+    return score;
+}
+
+function processKB(){
+
+    const kbText = document
+        .getElementById("kb")
+        .value;
+
+    const chunks = kbText
+        .split("\n")
+        .filter(x => x.trim() !== "");
+
+    vectorDB = [];
+
+    let html = "";
+
+    for(let i=0;i<chunks.length;i++){
+
+        const chunk = chunks[i];
+
+        const embedding = createEmbedding(chunk);
+
+        vectorDB.push({
+            text: chunk,
+            embedding: embedding
+        });
+
+        html += `
+        <div class="step">
+
+            <h3>Chunk ${i+1}</h3>
+
+            <div class="chunk">
+                ${chunk}
+
+                <div class="vector">
+                    Embedding:
+                    [${embedding.join(", ")}]
+                </div>
+
+            </div>
+
+        </div>
+        `;
+    }
+
+    html += `
+    <div class="step">
+        <h3>Vector Database Ready</h3>
+        <p>${vectorDB.length} chunks stored successfully.</p>
+    </div>
+    `;
+
+    document.getElementById("kbOutput").innerHTML = html;
+}
+
+function runRAG(){
+
+    if(vectorDB.length === 0){
+
+        alert("Please process the knowledge base first.");
+
+        return;
+    }
+
+    const query = document
+        .getElementById("query")
+        .value;
+
+    const queryEmbedding = createEmbedding(query);
+
+    let scored = [];
+
+    for(let i=0;i<vectorDB.length;i++){
+
+        const item = vectorDB[i];
+
+        const score = similarity(
+            queryEmbedding,
+            item.embedding
+        );
+
+        scored.push({
+            text: item.text,
+            embedding: item.embedding,
+            score: score
+        });
+    }
+
+    scored.sort((a,b)=>b.score-a.score);
+
+    const topResults = scored.slice(0,2);
+
+    let html = "";
+
+    html += `
+    <div class="step">
+
+        <h3>User Query Embedding</h3>
+
+        <div class="chunk">
+
+            ${query}
+
+            <div class="vector">
+                Query Vector:
+                [${queryEmbedding.join(", ")}]
+            </div>
+
+        </div>
+
+    </div>
+    `;
+
+    html += `
+    <div class="step">
+
+        <h3>Semantic Retrieval</h3>
+    `;
+
+    let context = "";
+
+    for(let i=0;i<topResults.length;i++){
+
+        const result = topResults[i];
+
+        context += result.text + " ";
+
+        html += `
+        <div class="chunk retrieved">
+
+            ${result.text}
+
+            <div class="vector">
+                Similarity Score:
+                ${result.score}
+            </div>
+
+        </div>
+        `;
+    }
+
+    html += `</div>`;
+
+    html += `
+    <div class="step">
+
+        <h3>Context Injection</h3>
+
+        <div class="chunk">
+            ${context}
+        </div>
+
+    </div>
+    `;
+
+    html += `
+    <div class="step">
+
+        <h3>LLM Final Response</h3>
+
+        <div class="chunk final">
+            Based on retrieved context, embeddings are numerical representations of text that help semantic search understand meaning and retrieve relevant information.
+        </div>
+
+    </div>
+    `;
+
+    document.getElementById("queryOutput").innerHTML = html;
+}
+
+processKB();
+
+</script>
+
+</body>
+</html>
