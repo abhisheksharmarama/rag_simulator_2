@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abhishek Sharma | AI Product & Growth Leader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #050816;
+      --card: rgba(15, 23, 42, 0.72);
+      --border: rgba(255,255,255,0.08);
+      --primary: #7c3aed;
+      --secondary: #06b6d4;
+      --accent: #8b5cf6;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --success: #22c55e;
+      --glow: 0 0 40px rgba(124, 58, 237, 0.35);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top left, rgba(124,58,237,0.2), transparent 25%),
+                  radial-gradient(circle at bottom right, rgba(6,182,212,0.15), transparent 25%),
+                  var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: -2;
+    }
+
+    .floating-glow {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(124,58,237,0.25), transparent 70%);
+      filter: blur(80px);
+      z-index: -1;
+      animation: float 12s infinite ease-in-out alternate;
+    }
+
+    .floating-glow.two {
+      right: -100px;
+      bottom: -100px;
+      background: radial-gradient(circle, rgba(6,182,212,0.2), transparent 70%);
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(0px) translateX(0px);
+      }
+      to {
+        transform: translateY(-40px) translateX(30px);
+      }
+    }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: auto;
+      padding: 40px 0 80px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px;
+      align-items: center;
+      min-height: 90vh;
+    }
+
+    .glass {
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--glow);
+    }
+
+    .hero-card {
+      padding: 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "AI • Growth • Strategy • Product • Automation";
+      position: absolute;
+      top: 16px;
+      right: -70px;
+      font-size: 12px;
+      letter-spacing: 3px;
+      padding: 10px 80px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transform: rotate(30deg);
+      color: white;
+      font-weight: 700;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 24px;
+      color: #cbd5e1;
+      font-size: 14px;
+    }
+
+    .pulse {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 10px var(--success);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.5; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 1;
+      margin-bottom: 20px;
+      letter-spacing: -3px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #a78bfa, #67e8f9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 30px;
+      max-width: 700px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .stat-box {
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: 0.3s ease;
+    }
+
+    .stat-box:hover {
+      transform: translateY(-6px);
+      border-color: rgba(124,58,237,0.5);
+    }
+
+    .stat-box h3 {
+      font-size: 28px;
+      margin-bottom: 8px;
+      color: white;
+    }
+
+    .stat-box span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .profile-panel {
+      padding: 35px;
+      position: relative;
+    }
+
+    .avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      box-shadow: var(--glow);
+    }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .info-item {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .info-item small {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 6px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .info-item strong {
+      font-size: 15px;
+      color: white;
+    }
+
+    section {
+      margin-top: 70px;
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 42px;
+      margin-bottom: 30px;
+      letter-spacing: -2px;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 40px;
+      border-left: 2px solid rgba(255,255,255,0.08);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 30px;
+      padding: 28px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: 0.3s ease;
+    }
+
+    .timeline-item:hover {
+      transform: translateX(8px);
+      border-color: rgba(6,182,212,0.4);
+      box-shadow: 0 0 30px rgba(6,182,212,0.15);
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      left: -50px;
+      top: 34px;
+      box-shadow: 0 0 20px rgba(124,58,237,0.7);
+    }
+
+    .timeline-item h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .timeline-item h4 {
+      color: var(--secondary);
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+
+    .timeline-item p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-card {
+      padding: 28px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: 0.3s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(124,58,237,0.5);
+      box-shadow: var(--glow);
+    }
+
+    .skill-card h3 {
+      margin-bottom: 16px;
+      font-size: 20px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(124,58,237,0.15);
+      border: 1px solid rgba(124,58,237,0.2);
+      font-size: 13px;
+      color: #ddd6fe;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      padding: 30px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      overflow: hidden;
+      transition: 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 40px rgba(124,58,237,0.2);
+    }
+
+    .project-card::after {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(124,58,237,0.15);
+      top: -120px;
+      right: -120px;
+      filter: blur(20px);
+    }
+
+    .project-card h3 {
+      font-size: 24px;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      line-height: 1.7;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer {
+      margin-top: 80px;
+      text-align: center;
+      padding: 40px;
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .cta {
+      margin-top: 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 28px;
+      border-radius: 16px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s ease;
+      box-shadow: var(--glow);
+    }
+
+    .cta:hover {
+      transform: translateY(-4px) scale(1.02);
+    }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      opacity: 0.35;
+    }
+
+    @media(max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 3.5rem;
+      }
+
+      .hero-card,
+      .profile-panel {
+        padding: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="particles"></canvas>
+
+  <div class="floating-glow"></div>
+  <div class="floating-glow two"></div>
+
+  <div class="container">
+
+    <section class="hero">
+      <div class="hero-card glass">
+        <div class="tag">
+          <span class="pulse"></span>
+          MBA Candidate • AI Product Thinker • Growth Strategist
+        </div>
+
+        <h1>
+          Abhishek <br>
+          <span class="gradient-text">Sharma</span>
+        </h1>
+
+        <p>
+          Sales & growth leader with a strong blend of AI product thinking, marketing strategy, automation systems, and customer-centric execution. Currently driving performance marketing and lead conversion while building futuristic AI-powered business solutions.
+        </p>
+
+        <a href="#" class="cta">
+          Open To Opportunities →
+        </a>
+
+        <div class="stats">
+          <div class="stat-box">
+            <h3>90K+</h3>
+            <span>Monthly Revenue Handling Experience</span>
+          </div>
+
+          <div class="stat-box">
+            <h3>AI + Ads</h3>
+            <span>Growth & Automation Expertise</span>
+          </div>
+
+          <div class="stat-box">
+            <h3>MBA</h3>
+            <span>Business + Product Management Lens</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-panel glass">
+        <div class="avatar">AS</div>
+
+        <div class="profile-info">
+          <div class="info-item">
+            <small>Current Role</small>
+            <strong>Sales Manager • Paid Ads & Conversion Strategy</strong>
+          </div>
+
+          <div class="info-item">
+            <small>Specialization</small>
+            <strong>AI Product Thinking • Performance Marketing • Automation</strong>
+          </div>
+
+          <div class="info-item">
+            <small>Focus Areas</small>
+            <strong>Lead Conversion • Funnel Optimization • AI Workflows</strong>
+          </div>
+
+          <div class="info-item">
+            <small>Location</small>
+            <strong>Delhi, India</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Experience Timeline</h2>
+
+      <div class="timeline">
+
+        <div class="timeline-item glass">
+          <h3>Sales Manager</h3>
+          <h4>Performance Marketing & Conversion Operations</h4>
+          <p>
+            Leading campaign optimization initiatives across Google and Meta ecosystems while improving lead conversion efficiency, follow-up hygiene, and revenue outcomes. Built analytical workflows to improve operational visibility and campaign-level accountability.
+          </p>
+        </div>
+
+        <div class="timeline-item glass">
+          <h3>AI Product Builder</h3>
+          <h4>Insurance Claims & Automation Concepts</h4>
+          <p>
+            Designed AI-first concepts like ClaimFlow AI — a futuristic insurance claims ecosystem focused on reducing claim settlement friction using automation, document intelligence, service center orchestration, and customer transparency.
+          </p>
+        </div>
+
+        <div class="timeline-item glass">
+          <h3>MBA Candidate</h3>
+          <h4>Business Strategy • Design Thinking • Innovation</h4>
+          <p>
+            Working on deepfake ethics, AI trust systems, stakeholder mapping, and product innovation assignments with a strong focus on business impact, customer empathy, and scalable AI implementation.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Core Skill Matrix</h2>
+
+      <div class="skills-grid">
+
+        <div class="skill-card glass">
+          <h3>Growth & Marketing</h3>
+          <div class="chips">
+            <div class="chip">Google Ads</div>
+            <div class="chip">Meta Ads</div>
+            <div class="chip">Lead Funnels</div>
+            <div class="chip">Conversion Rate Optimization</div>
+            <div class="chip">Campaign Analytics</div>
+          </div>
+        </div>
+
+        <div class="skill-card glass">
+          <h3>AI & Product</h3>
+          <div class="chips">
+            <div class="chip">AI Product Strategy</div>
+            <div class="chip">Automation Systems</div>
+            <div class="chip">Prompt Engineering</div>
+            <div class="chip">RAG Understanding</div>
+            <div class="chip">Design Thinking</div>
+          </div>
+        </div>
+
+        <div class="skill-card glass">
+          <h3>Operations</h3>
+          <div class="chips">
+            <div class="chip">Sales Ops</div>
+            <div class="chip">Reporting</div>
+            <div class="chip">KPI Tracking</div>
+            <div class="chip">Process Optimization</div>
+            <div class="chip">Team Management</div>
+          </div>
+        </div>
+
+        <div class="skill-card glass">
+          <h3>Tools & Platforms</h3>
+          <div class="chips">
+            <div class="chip">Google Sheets</div>
+            <div class="chip">Analytics</div>
+            <div class="chip">AI Studio</div>
+            <div class="chip">Presentation Design</div>
+            <div class="chip">Workflow Systems</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Highlighted Projects</h2>
+
+      <div class="project-grid">
+
+        <div class="project-card glass">
+          <h3>ClaimFlow AI</h3>
+          <p>
+            Conceptualized a next-generation AI-powered insurance claims experience that streamlines accident reporting, document verification, repair orchestration, and settlement timelines.
+          </p>
+        </div>
+
+        <div class="project-card glass">
+          <h3>Deepfake Trust Framework</h3>
+          <p>
+            Conducted stakeholder-based research on deepfake ethics and brand trust erosion in digital ecosystems using design thinking methodologies and business impact analysis.
+          </p>
+        </div>
+
+        <div class="project-card glass">
+          <h3>Campaign Automation System</h3>
+          <p>
+            Built structured sales and campaign allocation systems with automated reshuffling logic, performance ranking, and lead assignment optimization workflows.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Professional Identity</h2>
+
+      <div class="timeline">
+        <div class="timeline-item glass">
+          <h3>What Sets Me Apart</h3>
+          <p>
+            I combine sales execution, marketing analytics, and AI-first product thinking into one skill stack. My approach focuses on solving operational inefficiencies, building scalable systems, and creating customer-centric digital experiences powered by automation and intelligent workflows.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <p>
+        Designed as a futuristic interactive resume • Built with HTML, CSS & JavaScript
+      </p>
+    </div>
+
+  </div>
+
+  <script>
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+
+    for (let i = 0; i < 120; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2,
+        dx: (Math.random() - 0.5) * 0.7,
+        dy: (Math.random() - 0.5) * 0.7
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach((p, i) => {
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(167,139,250,0.8)';
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(103,232,249,${1 - dist / 120})`;
+            ctx.lineWidth = 0.4;
+            ctx.stroke();
+          }
+        }
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    const revealElements = document.querySelectorAll('.glass');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0px)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    revealElements.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(40px)';
+      el.style.transition = 'all 0.8s ease';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
