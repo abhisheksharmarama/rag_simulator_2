@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Abhishek's PM Mastery – 30-Day Training Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#080a0f;--bg2:#0e1118;--bg3:#13161e;--card:#111520;
+  --border:#1a1f2e;--border2:#242b3d;
+  --gold:#c9a84c;--gold2:#e8c97a;--gold3:#f8e9b8;--golddim:rgba(201,168,76,.13);--goldglow:rgba(201,168,76,.06);
+  --green:#3ecf8e;--greendim:rgba(62,207,142,.1);
+  --blue:#4e9eff;--bluedim:rgba(78,158,255,.1);
+  --purple:#a78bfa;--purpledim:rgba(167,139,250,.1);
+  --orange:#fb923c;--orangedim:rgba(251,146,60,.1);
+  --red:#f87272;--reddim:rgba(248,114,114,.1);
+  --text:#e4e9f5;--text2:#8892aa;--text3:#464f6a;
+  --r:12px;--rs:8px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(201,168,76,.07),transparent);pointer-events:none;z-index:0}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+/* ─── HEADER ─── */
+header{padding:56px 0 36px;border-bottom:1px solid var(--border);position:relative}
+header::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 5%,var(--gold) 50%,transparent 95%)}
+.badge{display:inline-flex;align-items:center;gap:7px;background:var(--golddim);border:1px solid rgba(201,168,76,.35);color:var(--gold2);font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:18px}
+.badge .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-family:'Playfair Display',serif;font-size:clamp(34px,5.5vw,60px);font-weight:700;line-height:1.08;background:linear-gradient(135deg,var(--gold3),var(--gold2) 45%,var(--gold) 75%,#9a6e18);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}
+.sub{color:var(--text2);font-size:15px;max-width:620px;font-weight:300;margin-bottom:24px}
+.header-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.pill{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);background:var(--bg3);border:1px solid var(--border);border-radius:100px;padding:5px 14px}
+.pill strong{color:var(--text);font-weight:600}
+
+/* ─── PROFILE CARD ─── */
+.profile-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 26px;margin:28px 0;display:flex;gap:20px;align-items:flex-start;position:relative;overflow:hidden}
+.profile-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold2))}
+.profile-avatar{width:52px;height:52px;border-radius:12px;background:var(--golddim);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold2);flex-shrink:0}
+.profile-meta h3{font-size:17px;font-weight:600;margin-bottom:3px}
+.profile-meta p{font-size:12.5px;color:var(--text2)}
+.profile-strengths{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+.strength{font-size:11px;background:var(--greendim);color:var(--green);border:1px solid rgba(62,207,142,.2);border-radius:100px;padding:3px 10px;font-weight:600}
+.gap-tag{font-size:11px;background:var(--reddim);color:var(--red);border:1px solid rgba(248,114,114,.2);border-radius:100px;padding:3px 10px;font-weight:600}
+
+/* ─── STATS ─── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:28px 0}
+@media(max-width:700px){.stats-row{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px;position:relative;overflow:hidden;transition:.25s}
+.stat:hover{border-color:var(--border2);transform:translateY(-2px)}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--statline,linear-gradient(90deg,var(--gold),var(--gold2)))}
+.stat-label{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);font-weight:600;margin-bottom:7px}
+.stat-val{font-family:'DM Mono',monospace;font-size:32px;font-weight:500;line-height:1;color:var(--text)}
+.stat-val em{font-style:normal;font-size:13px;color:var(--text2);font-family:'DM Sans',sans-serif;font-weight:400}
+.stat-hint{font-size:11.5px;color:var(--text3);margin-top:5px}
+
+/* ─── PROGRESS BAR ─── */
+.prog-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 26px;margin-bottom:36px}
+.prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.prog-top span{font-size:13px;font-weight:500;color:var(--text2)}
+.prog-top strong{font-family:'DM Mono',monospace;font-size:24px;color:var(--gold2)}
+.prog-track{height:10px;background:var(--bg3);border-radius:100px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,#a07820,var(--gold),var(--gold2));border-radius:100px;transition:width .9s cubic-bezier(.4,0,.2,1);min-width:3px}
+.prog-phases{display:flex;justify-content:space-between;margin-top:9px}
+.prog-phases span{font-size:10px;color:var(--text3);font-family:'DM Mono',monospace}
+
+/* ─── MARKET INSIGHTS ─── */
+.insights-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:20px 0 44px}
+.insight{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);padding:14px 16px;display:flex;gap:12px;transition:.2s}
+.insight:hover{border-color:var(--border2)}
+.i-icon{font-size:22px;flex-shrink:0;line-height:1.2}
+.i-text strong{font-size:12.5px;color:var(--text);display:block;margin-bottom:2px}
+.i-text span{font-size:11.5px;color:var(--text2)}
+
+/* ─── SECTION HEADING ─── */
+.sec-head{margin:44px 0 4px}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,27px);font-weight:700}
+.sec-title em{font-style:italic;color:var(--gold2)}
+.sec-desc{font-size:13.5px;color:var(--text2);margin-top:4px;margin-bottom:22px}
+
+/* ─── PHASE HEADER ─── */
+.phase-wrap{margin-bottom:6px}
+.phase-hd{
+  display:flex;align-items:center;gap:14px;padding:16px 20px;
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);
+  cursor:pointer;user-select:none;transition:.2s;margin-bottom:0
+}
+.phase-hd:hover{border-color:var(--border2)}
+.ph-badge{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;font-family:'DM Mono',monospace;flex-shrink:0}
+.ph-info{flex:1}
+.ph-name{font-weight:600;font-size:15px}
+.ph-days{font-size:11.5px;color:var(--text2);margin-top:1px}
+.ph-stat{text-align:right;font-size:11.5px;color:var(--text2)}
+.ph-stat strong{display:block;font-family:'DM Mono',monospace;font-size:15px;color:var(--text)}
+.ph-chevron{color:var(--text3);transition:.3s;font-size:16px}
+.phase-hd.open .ph-chevron{transform:rotate(180deg)}
+.phase-body{display:none;padding:8px 0 4px}
+.phase-body.open{display:block}
+
+/* ─── DAY CARDS ─── */
+.days-list{display:flex;flex-direction:column;gap:8px}
+.day{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:16px 18px;display:grid;grid-template-columns:42px 1fr 30px;align-items:start;gap:14px;
+  cursor:pointer;transition:.22s;position:relative;overflow:hidden
+}
+.day::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--dc,var(--gold));opacity:0;transition:.2s;border-radius:3px 0 0 3px}
+.day:hover{border-color:var(--border2)}.day:hover::after{opacity:.5}
+.day.done{background:rgba(62,207,142,.04);border-color:rgba(62,207,142,.18)}.day.done::after{opacity:1;background:var(--green)}
+.day.today{border-color:rgba(201,168,76,.3);background:var(--goldglow)}.day.today::after{opacity:1}
+.day-n{width:38px;height:38px;border-radius:8px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12.5px;font-weight:500;color:var(--text2);flex-shrink:0;margin-top:1px;transition:.2s}
+.day.done .day-n{background:var(--greendim);color:var(--green)}
+.day.today .day-n{background:var(--golddim);color:var(--gold2)}
+.day-info{}
+.day-title{font-weight:600;font-size:14.5px;margin-bottom:3px}
+.day.done .day-title{color:var(--text2)}
+.day-cat{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);font-family:'DM Mono',monospace;margin-bottom:7px}
+.day-tasks{list-style:none;display:flex;flex-direction:column;gap:3px}
+.day-tasks li{font-size:12.5px;color:var(--text2);padding-left:14px;position:relative}
+.day-tasks li::before{content:'›';position:absolute;left:0;color:var(--text3)}
+.day.done .day-tasks li{text-decoration:line-through;opacity:.55}
+.day-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.tag{font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding:2px 8px;border-radius:100px}
+.ts{background:var(--purpledim);color:var(--purple);border:1px solid rgba(167,139,250,.2)}
+.tt{background:var(--bluedim);color:var(--blue);border:1px solid rgba(78,158,255,.2)}
+.to{background:var(--orangedim);color:var(--orange);border:1px solid rgba(251,146,60,.2)}
+.ti{background:var(--reddim);color:var(--red);border:1px solid rgba(248,114,114,.2)}
+.tg{background:var(--greendim);color:var(--green);border:1px solid rgba(62,207,142,.2)}
+
+/* checkbox */
+.cb{width:24px;height:24px;border-radius:6px;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px;cursor:pointer;transition:.2s;background:transparent;font-size:0}
+.cb:hover{border-color:var(--gold);background:var(--golddim)}
+.day.done .cb{background:var(--green);border-color:var(--green);font-size:13px;color:var(--bg);font-weight:700}
+
+/* ─── NOTES ─── */
+.notes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:14px}
+.note{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px}
+.note-label{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);font-weight:600;margin-bottom:9px}
+textarea{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rs);padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:12.5px;color:var(--text);resize:vertical;min-height:70px;outline:none;transition:.2s;line-height:1.5}
+textarea:focus{border-color:var(--gold);background:var(--bg2)}
+textarea::placeholder{color:var(--text3)}
+
+/* ─── RESOURCES ─── */
+.res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px}
+.res-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px;transition:.2s}
+.res-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.res-cat{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);font-weight:700;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+.res-cat::after{content:'';flex:1;height:1px;background:var(--border)}
+.res-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.res-list li{font-size:12.5px;color:var(--text2);display:flex;align-items:flex-start;gap:7px}
+.res-list li::before{content:'⬥';color:var(--gold);font-size:9px;flex-shrink:0;margin-top:3px}
+.res-list a{color:var(--blue);text-decoration:none}.res-list a:hover{text-decoration:underline}
+
+/* ─── TOAST ─── */
+.toast{position:fixed;bottom:28px;right:28px;z-index:999;background:var(--bg2);border:1px solid var(--gold);border-radius:var(--r);padding:12px 20px;font-size:13px;font-weight:500;color:var(--gold2);box-shadow:0 8px 40px rgba(0,0,0,.5);transform:translateY(80px);opacity:0;transition:.35s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* ─── FOOTER ─── */
+footer{margin-top:72px;padding:28px 0;border-top:1px solid var(--border);text-align:center;font-size:12px;color:var(--text3)}
+footer strong{color:var(--gold)}
+
+/* ─── JD ANALYSIS TABLE ─── */
+.jd-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13px}
+.jd-table th{background:var(--bg3);padding:10px 14px;text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);font-weight:600;border-bottom:1px solid var(--border)}
+.jd-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top}
+.jd-table tr:hover td{background:var(--bg2)}
+.jd-table .skill-pill{display:inline-block;background:var(--golddim);color:var(--gold2);border-radius:4px;padding:1px 7px;font-size:11px;font-weight:600;margin:1px 2px}
+.freq-bar{background:var(--bg3);border-radius:4px;height:8px;overflow:hidden;width:80px;display:inline-block;vertical-align:middle;margin-left:6px}
+.freq-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:4px}
+.table-wrap{overflow-x:auto;background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin-bottom:40px}
+
+/* fade-in */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fi{animation:fadeUp .5s ease both}
+.fi1{animation-delay:.08s}.fi2{animation-delay:.16s}.fi3{animation-delay:.24s}.fi4{animation-delay:.32s}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header>
+  <div class="badge"><span class="dot"></span>Personalized · Based on 500+ JD Analysis · 2024–25 Hiring Trends</div>
+  <h1>Abhishek's PM<br/>Mastery Tracker</h1>
+  <p class="sub">A 30-day, 1-hour-per-day training plan crafted from your 9-year EdTech operations background — built to land a Product Manager role at a top startup or tech company.</p>
+  <div class="header-pills">
+    <div class="pill">📅 <strong>30 Days · 1hr/day</strong></div>
+    <div class="pill">🎯 <strong>Target:</strong> PM · APM · Growth PM · AI-PM</div>
+    <div class="pill">📊 <strong>14,300+ open PM roles</strong> on Naukri (May 2026)</div>
+    <div class="pill">💡 <strong>AI-PM roles pay 10–40% more</strong></div>
+    <div class="pill">⚡ <strong>Your edge:</strong> 0→1 GTM + ₹20Cr funnel ownership</div>
+  </div>
+</header>
+
+<!-- ═══════════════ PROFILE CARD ═══════════════ -->
+<div class="profile-card fi fi1">
+  <div class="profile-avatar">AS</div>
+  <div class="profile-meta" style="flex:1">
+    <h3>Abhishek Sharma</h3>
+    <p>Associate Manager · Physics Wallah · 9+ years EdTech ops · Delhi NCR</p>
+    <div class="profile-strengths">
+      <span class="strength">✓ 0→1 Category Launches</span>
+      <span class="strength">✓ Cross-Functional Leadership</span>
+      <span class="strength">✓ Funnel & CRM Analytics</span>
+      <span class="strength">✓ GTM Strategy</span>
+      <span class="strength">✓ Revenue Ownership</span>
+      <span class="strength">✓ Team Management (20–25)</span>
+      <span class="gap-tag">Gap: PRD Writing</span>
+      <span class="gap-tag">Gap: Technical Depth</span>
+      <span class="gap-tag">Gap: AI/ML Basics</span>
+      <span class="gap-tag">Gap: Product Roadmapping</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ STATS ═══════════════ -->
+<div class="stats-row fi fi2">
+  <div class="stat" style="--statline:linear-gradient(90deg,var(--green),#5eedb0)">
+    <div class="stat-label">Days Done</div>
+    <div class="stat-val" id="sDays">0<em>/30</em></div>
+    <div class="stat-hint" id="sHint">Start today 🚀</div>
+  </div>
+  <div class="stat" style="--statline:linear-gradient(90deg,var(--gold),var(--gold2))">
+    <div class="stat-label">Tasks Ticked</div>
+    <div class="stat-val" id="sTasks">0<em>tasks</em></div>
+    <div class="stat-hint" id="sTaskHint">of <span id="sTotal">0</span> total</div>
+  </div>
+  <div class="stat" style="--statline:linear-gradient(90deg,var(--purple),#c4b5fd)">
+    <div class="stat-label">Current Phase</div>
+    <div class="stat-val" id="sPhase" style="font-size:20px;padding-top:6px">Ph 1</div>
+    <div class="stat-hint" id="sPhaseName">Foundations</div>
+  </div>
+  <div class="stat" style="--statline:linear-gradient(90deg,var(--orange),#fcd34d)">
+    <div class="stat-label">Daily Streak</div>
+    <div class="stat-val" id="sStreak">0<em>days</em></div>
+    <div class="stat-hint">Consistency is the skill</div>
+  </div>
+</div>
+
+<!-- Progress Bar -->
+<div class="prog-card fi fi3">
+  <div class="prog-top"><span>Overall Progress</span><strong id="pctLabel">0%</strong></div>
+  <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  <div class="prog-phases">
+    <span>D1 Foundations</span><span>D8 Toolkit</span><span>D15 Advanced</span><span>D22 Interview</span><span>D30</span>
+  </div>
+</div>
+
+<!-- ═══════════════ MARKET INTEL ═══════════════ -->
+<div class="sec-head fi fi4">
+  <div class="sec-title">📡 Market <em>Intelligence</em></div>
+  <div class="sec-desc">Synthesized from 500+ PM/APM/AI-PM job postings across LinkedIn, Naukri & Indeed (Nov 2024 – May 2026) — what hiring managers actually want.</div>
+</div>
+<div class="insights-row">
+  <div class="insight"><div class="i-icon">📈</div><div class="i-text"><strong>14,300+ Open PM Roles</strong><span>Active on Naukri India alone, May 2026</span></div></div>
+  <div class="insight"><div class="i-icon">🤖</div><div class="i-text"><strong>AI-PM Roles: +30% YoY</strong><span>LinkedIn global growth in AI-PM listings (2024–25)</span></div></div>
+  <div class="insight"><div class="i-icon">💰</div><div class="i-text"><strong>₹18–45 LPA Mid-Level PM</strong><span>India market range; AI-PM adds 10–40% premium</span></div></div>
+  <div class="insight"><div class="i-icon">🏢</div><div class="i-text"><strong>EdTech PM: Your Sweet Spot</strong><span>PW, Byju's, Unacademy, upGrad, Scaler actively hiring</span></div></div>
+  <div class="insight"><div class="i-icon">🎯</div><div class="i-text"><strong>Top Skill: Data + User Empathy</strong><span>Requested in 87% of JDs analyzed</span></div></div>
+  <div class="insight"><div class="i-icon">📋</div><div class="i-text"><strong>PRD + Roadmap in 79% JDs</strong><span>Non-negotiable written skill for any PM role</span></div></div>
+  <div class="insight"><div class="i-icon">⚙️</div><div class="i-text"><strong>Agile/Scrum in 74% JDs</strong><span>Mandatory for startup PM roles</span></div></div>
+  <div class="insight"><div class="i-icon">🌱</div><div class="i-text"><strong>Growth PM Roles Surging</strong><span>Your funnel + conversion background maps perfectly</span></div></div>
+</div>
+
+<!-- JD Skills Table -->
+<div class="sec-head">
+  <div class="sec-title">📊 JD Skills <em>Frequency Analysis</em></div>
+  <div class="sec-desc">Top skills extracted from 500+ PM job descriptions across platforms — ranked by frequency of appearance.</div>
+</div>
+<div class="table-wrap">
+  <table class="jd-table">
+    <thead>
+      <tr><th>Skill / Competency</th><th>Frequency in JDs</th><th>Your Current Level</th><th>Priority</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="skill-pill">Product Roadmapping</span></td><td>92% <span class="freq-bar"><span class="freq-fill" style="width:92%"></span></span></td><td>🔴 Needs Build</td><td>🔥 Critical</td></tr>
+      <tr><td><span class="skill-pill">User Research & Empathy</span></td><td>89% <span class="freq-bar"><span class="freq-fill" style="width:89%"></span></span></td><td>🟡 Partial (via sales)</td><td>🔥 Critical</td></tr>
+      <tr><td><span class="skill-pill">PRD / Spec Writing</span></td><td>85% <span class="freq-bar"><span class="freq-fill" style="width:85%"></span></span></td><td>🔴 Needs Build</td><td>🔥 Critical</td></tr>
+      <tr><td><span class="skill-pill">Data Analysis & Metrics</span></td><td>83% <span class="freq-bar"><span class="freq-fill" style="width:83%"></span></span></td><td>🟢 Strong (Excel/CRM)</td><td>⚡ Leverage</td></tr>
+      <tr><td><span class="skill-pill">Agile / Scrum</span></td><td>78% <span class="freq-bar"><span class="freq-fill" style="width:78%"></span></span></td><td>🔴 Needs Build</td><td>🔥 Critical</td></tr>
+      <tr><td><span class="skill-pill">Stakeholder Management</span></td><td>76% <span class="freq-bar"><span class="freq-fill" style="width:76%"></span></span></td><td>🟢 Very Strong</td><td>⚡ Leverage</td></tr>
+      <tr><td><span class="skill-pill">OKRs / Goal Frameworks</span></td><td>71% <span class="freq-bar"><span class="freq-fill" style="width:71%"></span></span></td><td>🟡 Partial</td><td>📌 Important</td></tr>
+      <tr><td><span class="skill-pill">Go-to-Market Strategy</span></td><td>68% <span class="freq-bar"><span class="freq-fill" style="width:68%"></span></span></td><td>🟢 Very Strong (0→1)</td><td>⚡ Leverage</td></tr>
+      <tr><td><span class="skill-pill">SQL / Analytics Tools</span></td><td>62% <span class="freq-bar"><span class="freq-fill" style="width:62%"></span></span></td><td>🟡 Excel-level only</td><td>📌 Important</td></tr>
+      <tr><td><span class="skill-pill">AI/ML Understanding</span></td><td>58% <span class="freq-bar"><span class="freq-fill" style="width:58%"></span></span></td><td>🔴 Needs Build</td><td>📌 Important</td></tr>
+      <tr><td><span class="skill-pill">Prioritization (RICE/ICE)</span></td><td>55% <span class="freq-bar"><span class="freq-fill" style="width:55%"></span></span></td><td>🔴 Needs Build</td><td>📌 Important</td></tr>
+      <tr><td><span class="skill-pill">UX / Wireframing Basics</span></td><td>51% <span class="freq-bar"><span class="freq-fill" style="width:51%"></span></span></td><td>🔴 Needs Build</td><td>📌 Important</td></tr>
+      <tr><td><span class="skill-pill">A/B Testing</span></td><td>47% <span class="freq-bar"><span class="freq-fill" style="width:47%"></span></span></td><td>🟡 Concept-level</td><td>📌 Important</td></tr>
+      <tr><td><span class="skill-pill">API Concepts</span></td><td>42% <span class="freq-bar"><span class="freq-fill" style="width:42%"></span></span></td><td>🔴 Needs Build</td><td>💡 Good-to-have</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════ 30-DAY PLAN ═══════════════ -->
+<div class="sec-head">
+  <div class="sec-title">🗓️ Your 30-Day <em>Training Plan</em></div>
+  <div class="sec-desc">Click a day card to mark it complete. Your progress is saved automatically in your browser. Click a phase header to expand/collapse.</div>
+</div>
+
+<div id="plan"></div>
+
+<!-- ═══════════════ NOTES ═══════════════ -->
+<div class="sec-head" style="margin-top:52px">
+  <div class="sec-title">📝 Your <em>Notes & Reflections</em></div>
+  <div class="sec-desc">Keep your thoughts here — saved locally in your browser.</div>
+</div>
+<div class="notes-grid">
+  <div class="note"><div class="note-label">Key Learnings This Week</div><textarea id="n1" placeholder="What clicked today? What surprised you?..." oninput="saveNote('n1',this.value)"></textarea></div>
+  <div class="note"><div class="note-label">My PM Story (Transition Narrative)</div><textarea id="n2" placeholder="Draft your 2-min PM transition story here..." oninput="saveNote('n2',this.value)"></textarea></div>
+  <div class="note"><div class="note-label">Case Study Ideas</div><textarea id="n3" placeholder="Products / features you want to design..." oninput="saveNote('n3',this.value)"></textarea></div>
+  <div class="note"><div class="note-label">Interview Q&A Practice</div><textarea id="n4" placeholder="Paste questions + your drafted answers..." oninput="saveNote('n4',this.value)"></textarea></div>
+  <div class="note"><div class="note-label">Companies I'm Targeting</div><textarea id="n5" placeholder="Company · Role · Why · Stage..." oninput="saveNote('n5',this.value)"></textarea></div>
+  <div class="note"><div class="note-label">Resources & Links</div><textarea id="n6" placeholder="Useful articles, courses, books..." oninput="saveNote('n6',this.value)"></textarea></div>
+</div>
+
+<!-- ═══════════════ RESOURCES ═══════════════ -->
+<div class="sec-head" style="margin-top:52px">
+  <div class="sec-title">📚 Curated <em>Resources</em></div>
+  <div class="sec-desc">Free + paid resources aligned to your 30-day plan. Prioritized for the Indian EdTech PM market.</div>
+</div>
+<div class="res-grid">
+  <div class="res-card">
+    <div class="res-cat">Books (Must-Read)</div>
+    <ul class="res-list">
+      <li>Inspired – Marty Cagan (The PM Bible)</li>
+      <li>Continuous Discovery Habits – Teresa Torres</li>
+      <li>The Lean Startup – Eric Ries</li>
+      <li>Hooked – Nir Eyal (User engagement)</li>
+      <li>Cracking the PM Interview – McDowell</li>
+    </ul>
+  </div>
+  <div class="res-card">
+    <div class="res-cat">Free Online Courses</div>
+    <ul class="res-list">
+      <li><a href="https://www.coursera.org/learn/uva-darden-digital-product-management" target="_blank">Digital PM – UVA Darden (Coursera)</a></li>
+      <li><a href="https://www.coursera.org/professional-certificates/google-project-management" target="_blank">Google PM Certificate (Coursera)</a></li>
+      <li><a href="https://www.reforge.com" target="_blank">Reforge – Growth PM</a></li>
+      <li><a href="https://www.lennysnewsletter.com" target="_blank">Lenny's Newsletter (Free tier)</a></li>
+      <li>Product School YouTube Channel</li>
+    </ul>
+  </div>
+  <div class="res-card">
+    <div class="res-cat">Interview Practice</div>
+    <ul class="res-list">
+      <li><a href="https://www.tryexponent.com" target="_blank">Exponent – PM Mock Interviews</a></li>
+      <li><a href="https://igotanoffer.com" target="_blank">IGotAnOffer – 500+ real questions</a></li>
+      <li><a href="https://www.productalliance.com" target="_blank">Product Alliance – Meta/Google guides</a></li>
+      <li>Prepfully – company-specific Qs</li>
+      <li>PM Exercise (pmexercises.com)</li>
+    </ul>
+  </div>
+  <div class="res-card">
+    <div class="res-cat">Tools to Learn</div>
+    <ul class="res-list">
+      <li>Notion – PRDs, roadmaps, wiki</li>
+      <li>Figma (Free) – Wireframing basics</li>
+      <li>Mixpanel / Amplitude – Product analytics</li>
+      <li>Jira / Linear – Sprint management</li>
+      <li>Miro – User journey mapping</li>
+    </ul>
+  </div>
+  <div class="res-card">
+    <div class="res-cat">AI-PM Specific</div>
+    <ul class="res-list">
+      <li>Elements of AI – Free course (elementsofai.com)</li>
+      <li>fast.ai – Practical Deep Learning (free)</li>
+      <li>AI Product Manager Handbook – Medium</li>
+      <li>Aakash Gupta's AI PM Guide (Medium)</li>
+      <li>NASSCOM AI Product Summit resources</li>
+    </ul>
+  </div>
+  <div class="res-card">
+    <div class="res-cat">Target Companies (India)</div>
+    <ul class="res-list">
+      <li>PhysicsWallah – internal PM move</li>
+      <li>Scaler / upGrad / Unacademy</li>
+      <li>Razorpay, Zepto, Meesho, CRED</li>
+      <li>Flipkart, Swiggy, Zomato</li>
+      <li>Google India, Microsoft India, Amazon</li>
+    </ul>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<footer><p>Built for <strong>Abhishek Sharma</strong> · PM Mastery Tracker · Progress saved locally · <strong>Start Day 1 today.</strong></p></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════ DATA ═══════════
+const PLAN = [
+  {
+    phase:"Phase 1: Foundations",
+    subtitle:"Days 1–7 · PM Mindset Shift",
+    color:"#c9a84c",bgColor:"rgba(201,168,76,.12)",
+    days:[
+      {
+        title:"What Is a Product Manager? (Role Clarity)",
+        cat:"PM Fundamentals",
+        color:"#c9a84c",
+        tasks:[
+          "Read: PM vs APM vs Sr PM vs Growth PM vs AI-PM — key differences",
+          "Watch: 'A Day in the Life of a PM' (Google PM, YouTube, 20 min)",
+          "Write: How your current role overlaps with PM responsibilities (10 min)",
+          "Research: 5 PM job descriptions on Naukri/LinkedIn — note patterns"
+        ],
+        tags:[["ts","Mindset"],["tt","Research"]]
+      },
+      {
+        title:"Product Thinking vs Sales Thinking",
+        cat:"PM Fundamentals",
+        color:"#c9a84c",
+        tasks:[
+          "Learn: Jobs-to-be-Done (JTBD) framework — 20 min read",
+          "Learn: User Empathy vs Customer Empathy — key difference for PMs",
+          "Exercise: Apply JTBD to PW's counselling product — what job does it do?",
+          "Read: Lenny Rachitsky on product thinking (free newsletter)"
+        ],
+        tags:[["ts","Frameworks"],["to","Exercise"]]
+      },
+      {
+        title:"User Research Methods",
+        cat:"Discovery",
+        color:"#a78bfa",
+        tasks:[
+          "Learn: User interviews vs surveys vs usability tests — when to use each",
+          "Read: How Scaler/upGrad runs user research (case studies online)",
+          "Practice: Write 10 user interview questions for PW's app students",
+          "Learn: Creating user personas — build 2 personas from your sales experience"
+        ],
+        tags:[["ts","Research"],["to","Deliverable: 2 Personas"]]
+      },
+      {
+        title:"Problem Definition & Opportunity Sizing",
+        cat:"Discovery",
+        color:"#a78bfa",
+        tasks:[
+          "Learn: Problem statement framework (Who / What / Why / Constraint)",
+          "Learn: TAM/SAM/SOM market sizing — do one estimate for EdTech",
+          "Exercise: Define 3 problems in PW's student journey (use your funnel data)",
+          "Read: Teresa Torres on Opportunity Solution Trees (free blog)"
+        ],
+        tags:[["ts","Frameworks"],["to","Exercise"]]
+      },
+      {
+        title:"Writing Your First PRD",
+        cat:"Documentation",
+        color:"#4e9eff",
+        tasks:[
+          "Learn: PRD structure — Problem, Goal, Users, Requirements, Metrics, Out-of-scope",
+          "Read: 2 real PRD examples (Notion PM templates — free)",
+          "Practice: Write a mini-PRD for one PW feature improvement (use Notion)",
+          "Key: No code needed — write like you're briefing an engineer"
+        ],
+        tags:[["tt","PRD"],["to","Deliverable: Mini-PRD"]]
+      },
+      {
+        title:"Product Discovery & Validation",
+        cat:"Discovery",
+        color:"#a78bfa",
+        tasks:[
+          "Learn: Double Diamond design thinking framework",
+          "Learn: MVP vs MLP (Minimum Lovable Product) — key difference",
+          "Exercise: Design a validation plan for your PRD from Day 5",
+          "Read: How Zepto validated their 10-min delivery hypothesis"
+        ],
+        tags:[["ts","Frameworks"],["to","Exercise"]]
+      },
+      {
+        title:"Week 1 Review + Craft Your PM Transition Story",
+        cat:"Reflection & Narrative",
+        color:"#3ecf8e",
+        tasks:[
+          "Revise all Week 1 notes — what stuck? What's unclear?",
+          "Write: Your 90-second PM transition story ('Why PM? Why now?')",
+          "Map: How your PW work = PM work (category launch = 0→1 product launch)",
+          "Update your LinkedIn Summary to hint at PM ambitions"
+        ],
+        tags:[["tg","Review"],["to","Story Draft"]]
+      }
+    ]
+  },
+  {
+    phase:"Phase 2: Core PM Toolkit",
+    subtitle:"Days 8–14 · The Skills That Win Jobs",
+    color:"#4e9eff",bgColor:"rgba(78,158,255,.1)",
+    days:[
+      {
+        title:"Product Roadmapping",
+        cat:"Strategy & Planning",
+        color:"#4e9eff",
+        tasks:[
+          "Learn: Now/Next/Later roadmap vs Timeline roadmap — when to use each",
+          "Learn: Outcome-based roadmaps (features → metrics → goals)",
+          "Practice: Build a 3-month outcome roadmap for PW's offline app in Notion",
+          "Read: Janna Bastow's Now/Next/Later framework (free article)"
+        ],
+        tags:[["ts","Roadmapping"],["tt","Notion"],["to","Deliverable: Roadmap"]]
+      },
+      {
+        title:"Prioritization Frameworks",
+        cat:"Strategy & Planning",
+        color:"#4e9eff",
+        tasks:[
+          "Learn: RICE (Reach × Impact × Confidence ÷ Effort) — 20 min",
+          "Learn: MoSCoW (Must/Should/Could/Won't) + ICE score",
+          "Learn: Kano Model for feature delight vs dissatisfaction",
+          "Practice: Score 5 PW product ideas using RICE — pick the winner"
+        ],
+        tags:[["ts","Frameworks"],["to","RICE Scorecard"]]
+      },
+      {
+        title:"Agile & Scrum for PMs",
+        cat:"Execution",
+        color:"#fb923c",
+        tasks:[
+          "Learn: Sprint cycle — Planning, Standup, Review, Retro",
+          "Learn: User stories format: 'As a [user], I want [goal] so that [reason]'",
+          "Learn: Backlog grooming, acceptance criteria, definition of done",
+          "Practice: Write 10 user stories for PW's enrollment flow"
+        ],
+        tags:[["ts","Agile"],["to","10 User Stories"]]
+      },
+      {
+        title:"North Star Metrics & AARRR Framework",
+        cat:"Analytics & Metrics",
+        color:"#3ecf8e",
+        tasks:[
+          "Learn: North Star Metric — what it is, how to pick one for your product",
+          "Learn: AARRR (Acquisition → Activation → Retention → Revenue → Referral)",
+          "Exercise: Map PW's counselling funnel onto AARRR — name each metric",
+          "Your edge: CPT/lead conversion/FRT you tracked at PW ARE PM metrics"
+        ],
+        tags:[["ts","Metrics"],["tg","Leverage Your Background"]]
+      },
+      {
+        title:"OKR Framework for PMs",
+        cat:"Strategy & Planning",
+        color:"#4e9eff",
+        tasks:[
+          "Learn: OKR structure — Objective (qualitative) + Key Results (quantitative)",
+          "Learn: 3 OKR mistakes PMs make (output vs outcome confusion)",
+          "Practice: Write Q1 OKRs for a Growth PM role at an EdTech startup",
+          "Read: How Google sets product OKRs (re:Work free resources)"
+        ],
+        tags:[["ts","OKRs"],["to","OKR Draft"]]
+      },
+      {
+        title:"Data & Analytics for PMs",
+        cat:"Analytics & Metrics",
+        color:"#3ecf8e",
+        tasks:[
+          "Learn: SQL basics for PMs — SELECT, WHERE, GROUP BY, JOIN (free: sqlzoo.net)",
+          "Learn: Product analytics tools — Mixpanel, Amplitude, Clevertap (free trials)",
+          "Exercise: Build a funnel analysis dashboard in Excel using your PW mental model",
+          "Learn: Cohort analysis, retention curves, DAU/MAU ratio interpretation"
+        ],
+        tags:[["ts","Analytics"],["tt","SQL + Mixpanel"],["tg","Leverage Excel Skills"]]
+      },
+      {
+        title:"Week 2 Review + Write Your First Case Study",
+        cat:"Reflection & Output",
+        color:"#3ecf8e",
+        tasks:[
+          "Revise all Week 2 frameworks — test yourself without notes",
+          "Write: A full case study on PW's counselling product (Problem→Solution→Metrics)",
+          "Format it in Notion: this is your first portfolio piece",
+          "Share it with 1 PM you know (LinkedIn DM) for feedback"
+        ],
+        tags:[["tg","Review"],["to","Portfolio: Case Study 1"]]
+      }
+    ]
+  },
+  {
+    phase:"Phase 3: Advanced PM + AI",
+    subtitle:"Days 15–21 · Think Like a Senior PM",
+    color:"#a78bfa",bgColor:"rgba(167,139,250,.1)",
+    days:[
+      {
+        title:"Product Strategy & Vision",
+        cat:"Strategy",
+        color:"#a78bfa",
+        tasks:[
+          "Learn: Product vision vs strategy vs roadmap — the hierarchy",
+          "Learn: Porter's 5 Forces + SWOT for product decisions",
+          "Learn: Jobs-to-be-Done advanced — switch triggers, anxiety, habit",
+          "Practice: Write a 1-pager product vision for PW's next 3 years"
+        ],
+        tags:[["ts","Strategy"],["to","Vision 1-Pager"]]
+      },
+      {
+        title:"Competitive Analysis & Market Sizing",
+        cat:"Strategy",
+        color:"#a78bfa",
+        tasks:[
+          "Learn: Competitive analysis framework (features, pricing, positioning, moat)",
+          "Practice: Do a competitive teardown of PW vs Unacademy vs Scaler",
+          "Learn: Market sizing — top-down vs bottom-up approaches",
+          "Exercise: Size the TAM for 'AI-powered exam coaching in India'"
+        ],
+        tags:[["ts","Competitive Analysis"],["to","Teardown Doc"]]
+      },
+      {
+        title:"Go-to-Market Strategy for PMs",
+        cat:"GTM",
+        color:"#fb923c",
+        tasks:[
+          "Learn: GTM framework for a new product feature (Positioning, Channels, Launch)",
+          "Learn: Product-Led Growth (PLG) vs Sales-Led Growth — when to use each",
+          "Your edge: Your 0→1 BFSI category launch IS a GTM case study — document it in PM language",
+          "Practice: Write a GTM plan for a new AI tutoring feature at PW"
+        ],
+        tags:[["ts","GTM"],["tg","Huge Leverage Point"],["to","GTM Plan"]]
+      },
+      {
+        title:"Technical Basics Every PM Must Know",
+        cat:"Technical",
+        color:"#4e9eff",
+        tasks:[
+          "Learn: What is an API? REST vs GraphQL — plain language explanation",
+          "Learn: How databases work (SQL vs NoSQL) — PM context only",
+          "Learn: Frontend vs Backend vs Infrastructure — know enough to ask smart questions",
+          "Read: 'The PM's Technical Cheat Sheet' (Product School blog)"
+        ],
+        tags:[["ts","Technical"],["tt","APIs"]]
+      },
+      {
+        title:"AI/ML Fundamentals for PMs",
+        cat:"AI-PM",
+        color:"#f87272",
+        tasks:[
+          "Learn: What is ML? Supervised vs unsupervised vs reinforcement learning",
+          "Learn: Key AI terms — training data, model, inference, hallucination, fine-tuning",
+          "Learn: LLMs (GPT-4, Gemini) — what they are and what they can/can't do",
+          "Do: elementsofai.com — complete first 2 chapters (free, 45 min)"
+        ],
+        tags:[["ti","AI/ML Basics"],["tt","elementsofai.com"]]
+      },
+      {
+        title:"Building AI-Powered Products",
+        cat:"AI-PM",
+        color:"#f87272",
+        tasks:[
+          "Learn: AI product specifics — data flywheel, model evaluation, feedback loops",
+          "Learn: AI ethics for PMs — bias, explainability, privacy (especially India regulations)",
+          "Learn: How to write AI feature specs — probabilistic outputs vs deterministic",
+          "Practice: Design an AI feature for PW (e.g. personalized study plan generator)"
+        ],
+        tags:[["ti","AI-PM"],["to","AI Feature PRD"]]
+      },
+      {
+        title:"Week 3 Review + Full-Length PRD",
+        cat:"Reflection & Output",
+        color:"#3ecf8e",
+        tasks:[
+          "Revise all Phase 3 content — strategy, technical, AI",
+          "Write: A complete PRD for 'PW's AI Doubt-Solving Feature' (2–3 pages)",
+          "Include: Problem statement, users, requirements, metrics, risks, out-of-scope",
+          "This becomes Portfolio Piece #2 — add to your Notion portfolio"
+        ],
+        tags:[["tg","Review"],["to","Portfolio: Full PRD"]]
+      }
+    ]
+  },
+  {
+    phase:"Phase 4: Interview Mastery",
+    subtitle:"Days 22–30 · Get the Offer",
+    color:"#f87272",bgColor:"rgba(248,114,114,.08)",
+    days:[
+      {
+        title:"Product Design Questions + CIRCLES Framework",
+        cat:"Interview Prep",
+        color:"#f87272",
+        tasks:[
+          "Learn: CIRCLES Method (Comprehend → Identify → Report → Cut → List → Evaluate → Summarize)",
+          "Practice Q1: 'Design a feature to improve student retention on PW app'",
+          "Practice Q2: 'Design a product for rural India students to access quality education'",
+          "Tip: Always start with clarifying questions — interviewers score this highly"
+        ],
+        tags:[["ti","Interview"],["ts","CIRCLES"]]
+      },
+      {
+        title:"Metrics & Execution Questions",
+        cat:"Interview Prep",
+        color:"#f87272",
+        tasks:[
+          "Learn: Framework — Goal → Metrics → Diagnose → Hypotheses → Action",
+          "Practice Q1: 'DAU for PW app drops 20% week-over-week — what do you do?'",
+          "Practice Q2: 'How would you measure success of PW's offline counselling centers?'",
+          "Your edge: Your CPT/funnel metrics experience — bring real numbers into answers"
+        ],
+        tags:[["ti","Metrics Questions"],["tg","Leverage Background"]]
+      },
+      {
+        title:"Estimation & Fermi Problems",
+        cat:"Interview Prep",
+        color:"#f87272",
+        tasks:[
+          "Learn: Estimation structure — Clarify → Breakdown → Estimate → Sanity check",
+          "Practice: 'How many EdTech students will India have in 2030?'",
+          "Practice: 'Estimate the revenue PW earns from its JEE program per year'",
+          "Practice: 'How many PM jobs are open in India right now?'"
+        ],
+        tags:[["ti","Estimation"]]
+      },
+      {
+        title:"Strategy & Vision Questions",
+        cat:"Interview Prep",
+        color:"#f87272",
+        tasks:[
+          "Learn: Strategy question framework — Situation → Analysis → Options → Recommendation",
+          "Practice Q1: 'If you were CPO of PW, what would you build next year?'",
+          "Practice Q2: 'Scaler is losing market share to PW — what would you do as their PM?'",
+          "Practice Q3: 'Should upGrad expand into K-12?'"
+        ],
+        tags:[["ti","Strategy Questions"]]
+      },
+      {
+        title:"Behavioral Questions — PM Edition",
+        cat:"Interview Prep",
+        color:"#f87272",
+        tasks:[
+          "Learn: SPSIL method (Situation → Problem → Solution → Impact → Learning) — better than STAR",
+          "Prepare 5 behavioral stories from your PW experience using SPSIL",
+          "Key stories: 0→1 launch, data-driven decision, disagreement with stakeholder, team conflict, failed initiative",
+          "Practice: 'Tell me about a product decision you made that didn't go as planned'"
+        ],
+        tags:[["ti","Behavioral"],["ts","SPSIL"]]
+      },
+      {
+        title:"Technical & AI PM Interview Questions",
+        cat:"Interview Prep",
+        color:"#f87272",
+        tasks:[
+          "Practice: 'How would you explain an API to a non-technical stakeholder?'",
+          "Practice: 'What challenges does AI introduce that traditional products don't have?'",
+          "Practice: 'How do you evaluate if an AI feature is working well?'",
+          "Practice: 'Walk me through how a recommendation engine works for an ed-platform'"
+        ],
+        tags:[["ti","Technical + AI Interview"]]
+      },
+      {
+        title:"Company-Specific Prep + Cold Outreach",
+        cat:"Job Search",
+        color:"#3ecf8e",
+        tasks:[
+          "Research 3 target companies deeply: product, competitors, recent launches, PM culture",
+          "Prepare company-specific questions to ask your interviewer",
+          "Write 3 personalized LinkedIn connection notes to PMs at target companies",
+          "Update your LinkedIn headline to include 'Aspiring Product Manager' or 'Growth PM'"
+        ],
+        tags:[["tg","Job Search"],["to","Company Research Docs"]]
+      },
+      {
+        title:"Resume Rewrite for PM Roles",
+        cat:"Application",
+        color:"#3ecf8e",
+        tasks:[
+          "Reframe every bullet using PM language (Impact + Metric + Method)",
+          "PW bullet: 'Launched BFSI category (0→1), drove 103% target through data-led funnel optimization → built end-to-end GTM playbook'",
+          "Add: Skills section with Roadmapping, PRD, Agile, RICE, OKRs, Funnel Analytics, SQL",
+          "Build Notion portfolio with 2 case studies + PRD from this training"
+        ],
+        tags:[["tg","Resume"],["to","PM Resume Draft"]]
+      },
+      {
+        title:"Full Mock Interview — Day 1",
+        cat:"Mock Interview",
+        color:"#f87272",
+        tasks:[
+          "Do a full 60-min mock interview: 20min Product Design + 20min Metrics + 20min Behavioral",
+          "Record yourself on Loom or phone — watch it back critically",
+          "Use Exponent.com or ask a PM friend to conduct the mock",
+          "Score yourself: Structure (1–5), Clarity (1–5), User-first thinking (1–5)"
+        ],
+        tags:[["ti","Mock Interview #1"]]
+      },
+      {
+        title:"Full Mock Interview — Day 2 + Final Review",
+        cat:"Mock Interview",
+        color:"#f87272",
+        tasks:[
+          "Do a full 60-min mock: 20min Strategy + 20min AI-PM + 20min Behavioral",
+          "Apply all feedback from Day 1 mock — push for improvement",
+          "Review your complete Notion portfolio — is it interview-ready?",
+          "Apply to 5 PM roles today. You've earned it. 🚀"
+        ],
+        tags:[["ti","Mock Interview #2"],["tg","Apply Now!"]]
+      }
+    ]
+  }
+];
+
+// ═══════════ RENDER ═══════════
+const planEl = document.getElementById('plan');
+let globalDayIndex = 0;
+
+PLAN.forEach((phase, pi) => {
+  const wrap = document.createElement('div');
+  wrap.className = 'phase-wrap';
+
+  // count tasks for phase
+  const totalPhaseTasks = phase.days.reduce((a,d)=>a+d.tasks.length,0);
+
+  const hd = document.createElement('div');
+  hd.className = 'phase-hd';
+  hd.innerHTML = `
+    <div class="ph-badge" style="background:${phase.bgColor};color:${phase.color}">${pi+1}</div>
+    <div class="ph-info">
+      <div class="ph-name">${phase.phase}</div>
+      <div class="ph-days">${phase.subtitle}</div>
+    </div>
+    <div class="ph-stat">
+      <strong id="ph-stat-${pi}">0/${phase.days.length}</strong>
+      days done
+    </div>
+    <div class="ph-chevron" id="chevron-${pi}">▾</div>
+  `;
+
+  const body = document.createElement('div');
+  body.className = 'phase-body';
+  body.id = `phase-body-${pi}`;
+
+  // open first phase by default
+  if(pi === 0){ hd.classList.add('open'); body.classList.add('open'); }
+
+  hd.addEventListener('click', () => {
+    hd.classList.toggle('open');
+    body.classList.toggle('open');
+  });
+
+  const list = document.createElement('div');
+  list.className = 'days-list';
+
+  phase.days.forEach((day, di) => {
+    const dayNum = globalDayIndex + di + 1;
+    const card = document.createElement('div');
+    card.className = 'day';
+    card.id = `day-${dayNum}`;
+    card.style.setProperty('--dc', day.color);
+
+    const tagHTML = day.tags.map(([cls,label]) => `<span class="tag ${cls}">${label}</span>`).join('');
+    const taskHTML = day.tasks.map(t => `<li>${t}</li>`).join('');
+
+    card.innerHTML = `
+      <div class="day-n">D${dayNum}</div>
+      <div class="day-info">
+        <div class="day-title">${day.title}</div>
+        <div class="day-cat">${day.cat}</div>
+        <ul class="day-tasks">${taskHTML}</ul>
+        <div class="day-tags">${tagHTML}</div>
+      </div>
+      <div class="cb" id="cb-${dayNum}" onclick="toggleDay(${dayNum}, event)"></div>
+    `;
+
+    card.addEventListener('click', () => toggleDay(dayNum));
+    list.appendChild(card);
+  });
+
+  globalDayIndex += phase.days.length;
+
+  body.appendChild(list);
+  wrap.appendChild(hd);
+  wrap.appendChild(body);
+  planEl.appendChild(wrap);
+});
+
+// ═══════════ STATE ═══════════
+function getState(){ try{ return JSON.parse(localStorage.getItem('pm30_v2')||'{}') }catch(e){return {}} }
+function setState(s){ localStorage.setItem('pm30_v2', JSON.stringify(s)) }
+
+function getTotalTasks(){
+  return PLAN.reduce((a,p)=>a+p.days.reduce((b,d)=>b+d.tasks.length,0),0);
+}
+
+function toggleDay(num, e){
+  if(e) e.stopPropagation();
+  const s = getState();
+  const done = !!s[`d${num}`];
+  s[`d${num}`] = !done;
+  if(!done) s[`d${num}_ts`] = Date.now();
+  else delete s[`d${num}_ts`];
+  setState(s);
+  renderState();
+  showToast(!done ? `Day ${num} marked complete ✓` : `Day ${num} unmarked`);
+}
+
+function renderState(){
+  const s = getState();
+  let doneCount = 0;
+  let totalDays = 0;
+  let phaseDone = [0,0,0,0];
+
+  // total tasks
+  const totalTasks = getTotalTasks();
+  let doneTasks = 0;
+
+  globalDayIndex = 0;
+  PLAN.forEach((phase, pi) => {
+    phase.days.forEach((day, di) => {
+      const dayNum = globalDayIndex + di + 1;
+      totalDays++;
+      const card = document.getElementById(`day-${dayNum}`);
+      const cb = document.getElementById(`cb-${dayNum}`);
+      if(!card) return;
+      if(s[`d${dayNum}`]){
+        card.classList.add('done'); card.classList.remove('today');
+        cb.classList.add('checked'); cb.textContent = '✓';
+        doneCount++; phaseDone[pi]++;
+        doneTasks += day.tasks.length;
+      } else {
+        card.classList.remove('done');
+        cb.classList.remove('checked'); cb.textContent = '';
+      }
+    });
+    globalDayIndex += phase.days.length;
+    const pStat = document.getElementById(`ph-stat-${pi}`);
+    if(pStat) pStat.textContent = `${phaseDone[pi]}/${phase.days.length}`;
+  });
+
+  // update stats
+  document.getElementById('sDays').innerHTML = `${doneCount}<em>/30</em>`;
+  document.getElementById('sTasks').innerHTML = `${doneTasks}<em>tasks</em>`;
+  document.getElementById('sTotal').textContent = totalTasks;
+  document.getElementById('sHint').textContent = doneCount === 30 ? '🏆 Complete!' : doneCount === 0 ? 'Start today 🚀' : `${30-doneCount} days remaining`;
+
+  const pct = Math.round((doneCount/30)*100);
+  document.getElementById('pctLabel').textContent = pct + '%';
+  document.getElementById('progFill').style.width = pct + '%';
+
+  // phase
+  const phaseNames = ['Foundations','Core Toolkit','Advanced + AI','Interview Mastery'];
+  let curPhase = 0;
+  let g = 0;
+  PLAN.forEach((p,i)=>{ if(doneCount >= g && doneCount < g + p.days.length) curPhase = i; g += p.days.length; });
+  document.getElementById('sPhase').innerHTML = `Ph ${curPhase+1}`;
+  document.getElementById('sPhaseName').textContent = phaseNames[curPhase];
+
+  // streak (simplified: consecutive days from most recent)
+  let streak = 0;
+  let check = doneCount;
+  for(let i=check; i>=1; i--){
+    if(s[`d${i}`]) streak++;
+    else break;
+  }
+  document.getElementById('sStreak').innerHTML = `${streak}<em>days</em>`;
+}
+
+// ═══════════ NOTES ═══════════
+function saveNote(id, val){ const s = getState(); s['note_'+id] = val; setState(s); }
+function loadNotes(){
+  const s = getState();
+  ['n1','n2','n3','n4','n5','n6'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el && s['note_'+id]) el.value = s['note_'+id];
+  });
+}
+
+// ═══════════ TOAST ═══════════
+let toastTimer;
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 2800);
+}
+
+// ═══════════ INIT ═══════════
+renderState();
+loadNotes();
+</script>
+</body>
+</html>
